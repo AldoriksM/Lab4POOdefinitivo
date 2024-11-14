@@ -5,7 +5,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-public class main{
+/**
+ * Clase principal que ejecuta el menú para el sistema de climatización de un vehículo.
+ */
+public class main {
+    /**
+     * Método principal que ejecuta el menú y permite la interacción con el usuario.
+     * 
+     * @param args Argumentos de la línea de comandos.
+     */
     public static void main(String[] args) {
         Vehiculo miVehiculo = new Vehiculo();
         Scanner scanner = new Scanner(System.in);

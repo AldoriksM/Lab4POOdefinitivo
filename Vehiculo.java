@@ -28,13 +28,13 @@ public class Vehiculo implements IClimaB {
     }
 
     @Override
-    public void encender() {
+    public String encender() {
         estado = true;
-        System.out.println("Sistema de climatización encendido.");
+        return "Sistema de climatización encendido.";
     }
 
     @Override
-    public void apagar() {
+    public String apagar() {
         estado = false;
         System.out.println("Sistema de climatización apagado.");
     }
@@ -42,13 +42,77 @@ public class Vehiculo implements IClimaB {
     @Override
     public int ajustarTemperatura(int incremento) {
         temperatura += incremento;
-        System.out.println("Temperatura ajustada a: " + temperatura + "°C");
         return (int) temperatura;
     }
 
     @Override
     public int modoAutomatico(int temperaturaAmbiente) {
         temperatura = temperaturaAmbiente > 25 ? 22 : 24;
-        System.out.println("Modo automático activado. Temperatura ajustada a: " + temperatura + "°C");
         return (int) temperatura;
     }
+
+    @Override
+    public String ajustarVentilacion(int intensidad) {
+        if (intensidad >= 0 && intensidad <= 3) {
+            nivelVentilacion = intensidad;
+            return "Nivel de ventilación ajustado a: " + nivelVentilacion;
+        } else {
+            return "Nivel de ventilación inválido. Debe estar entre 0 y 3.";
+        }
+    }
+
+    @Override
+    public String activarModoEco() {
+        modoEco = true;
+        nivelVentilacion = Math.max(nivelVentilacion - 1, 0);  // Reduce intensidad en modo eco
+        return "Modo Eco activado. Nivel de ventilación ajustado a: " + nivelVentilacion;
+    }
+
+    @Override
+    public String ajustarDireccionVentilacion(String direccion) {
+        direccionVentilacion = direccion;
+        return "Dirección de ventilación ajustada a: " + direccionVentilacion;
+    }
+
+    @Override
+    public String activarCalefaccionAsientos(int nivelDelantero, int nivelTrasero) {
+        if (nivelDelantero >= 0 && nivelDelantero <= 3) {
+            asientosDelanteros = nivelDelantero;
+            return "Calefacción de asientos delanteros ajustada a: " + asientosDelanteros;
+        }
+        if (nivelTrasero >= 0 && nivelTrasero <= 3) {
+            asientosTraseros = nivelTrasero;
+            return "Calefacción de asientos traseros ajustada a: " + asientosTraseros;
+        }
+    }
+
+    @Override
+    public String activarCalefaccionRapida() {
+        temperatura = 28.0f;
+        return "Calefacción rápida activada. Temperatura ajustada a: " + temperatura + "°C";
+    }
+
+    @Override
+    public String activarDesempañador() {
+        desempañadorActivo = true;
+        return "Desempañador activado.";
+    }
+
+    @Override
+    public String desactivarDesempañador() {
+        desempañadorActivo = false;
+        return "Desempañador desactivado.";
+    }
+
+    @Override
+    public String programarMantenimiento(Date fecha) {
+        citaMantenimiento = fecha;
+        mantenimiento.add("Mantenimiento programado para: " + fecha.toString());
+        return "Cita de mantenimiento programada para: " + fecha;
+    }
+
+    @Override
+    public List<String> verHistorialMantenimiento() {
+        return mantenimiento;
+    }
+}

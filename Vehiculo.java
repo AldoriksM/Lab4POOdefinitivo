@@ -36,7 +36,7 @@ public class Vehiculo implements IClimaB {
     @Override
     public String apagar() {
         estado = false;
-        System.out.println("Sistema de climatización apagado.");
+        return "Sistema de climatización apagado.";
     }
 
     @Override
@@ -83,6 +83,10 @@ public class Vehiculo implements IClimaB {
         if (nivelTrasero >= 0 && nivelTrasero <= 3) {
             asientosTraseros = nivelTrasero;
             return "Calefacción de asientos traseros ajustada a: " + asientosTraseros;
+        }
+
+        else {
+            return "aqui hay error papi";
         }
     }
 
